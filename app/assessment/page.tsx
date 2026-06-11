@@ -8,8 +8,9 @@ const FORM_CSS = `
 :root { --ink:#1C1418; --ink-soft:#3A2F36; --parchment:#FAF6F0; --parchment-2:#F2EBE1; --border:#E0D5C8; --border-hover:#C8BCB0; --rose:#B05A72; --rose-light:#E8A4B5; --rose-pale:#F9EEF2; --sage:#6B9E85; --sage-pale:#EAF3EE; --amber:#C07840; --amber-pale:#FBF0E4; --text-main:#2C2228; --text-body:#4A3E44; --text-muted:#8A7A82; --white:#FFFFFF; }
 body { background: var(--parchment-2); color: var(--text-main); font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.6; min-height: 100vh; }
 .topbar { background: var(--ink); padding: 16px 40px; display: flex; align-items: center; justify-content: space-between; }
-.logo { font-family: 'Playfair Display', serif; font-size: 17px; color: var(--parchment); letter-spacing: 0.03em; }
-.logo span { display: block; font-family: 'Inter', sans-serif; font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.14em; text-transform: uppercase; margin-top: 1px; font-weight: 400; }
+.logo { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--parchment); letter-spacing: 0.06em; font-weight: 400; line-height: 1; }
+.logo em { font-style: italic; color: var(--rose-light); font-size: 22px; letter-spacing: 0.02em; margin-right: 1px; }
+.logo span { display: block; font-family: 'Inter', sans-serif; font-size: 9px; color: rgba(255,255,255,0.35); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 3px; font-weight: 400; }
 .topbar-badge { font-size: 11px; color: var(--rose-light); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; }
 .progress-strip { background: var(--white); border-bottom: 1px solid var(--border); padding: 0 40px; position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 12px rgba(28,20,24,0.06); }
 .step-nav { max-width: 640px; margin: 0 auto; display: flex; align-items: stretch; }
@@ -32,7 +33,7 @@ body { background: var(--parchment-2); color: var(--text-main); font-family: 'In
 .step-card h2 em { font-style: italic; color: var(--rose); }
 .step-subtitle { font-size: 13.5px; color: var(--text-muted); margin-bottom: 36px; line-height: 1.6; padding-bottom: 28px; border-bottom: 1px solid var(--border); }
 .field { margin-bottom: 28px; }
-.field label { display: block; font-size: 13px; font-weight: 600; color: var(--text-main); margin-bottom: 4px; letter-spacing: 0.01em; }
+.field > label { display: block; font-size: 13px; font-weight: 600; color: var(--text-main); margin-bottom: 4px; letter-spacing: 0.01em; }
 .field-hint { font-size: 12px; color: var(--text-muted); margin-bottom: 10px; line-height: 1.5; }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 @media (max-width: 500px) { .field-row { grid-template-columns: 1fr; } }
@@ -50,6 +51,7 @@ textarea { resize: vertical; min-height: 88px; line-height: 1.6; }
 .check-item:has(input:checked) .check-box { background: var(--rose); border-color: var(--rose); }
 .check-item:has(input:checked) .check-box::after { content: ''; width: 8px; height: 5px; border-left: 2px solid white; border-bottom: 2px solid white; transform: rotate(-45deg) translateY(-1px); display: block; }
 .check-text { font-size: 13px; color: var(--text-body); line-height: 1.4; }
+.check-emoji { margin-right: 5px; font-size: 14px; flex-shrink: 0; }
 .check-item:has(input:checked) .check-text { color: var(--rose); font-weight: 500; }
 .radio-pills { display: flex; flex-wrap: wrap; gap: 8px; }
 .radio-pill { cursor: pointer; }
@@ -84,10 +86,7 @@ textarea { resize: vertical; min-height: 88px; line-height: 1.6; }
 .btn-next svg, .btn-back svg { width: 15px; height: 15px; flex-shrink: 0; }
 .step-counter { font-size: 12px; color: var(--text-muted); letter-spacing: 0.05em; }
 .submit-block { text-align: center; padding-top: 4px; }
-.price-row { display: flex; align-items: baseline; justify-content: center; gap: 4px; margin-bottom: 4px; }
-.price-currency { font-size: 22px; color: var(--text-muted); font-weight: 300; }
-.price-amount { font-family: 'Playfair Display', serif; font-size: 52px; color: var(--ink); font-weight: 400; line-height: 1; }
-.price-label { font-size: 12px; color: var(--text-muted); letter-spacing: 0.07em; text-transform: uppercase; margin-bottom: 28px; }
+.price-label { font-size: 12px; color: var(--text-muted); letter-spacing: 0.07em; text-transform: uppercase; margin-top: 14px; margin-bottom: 4px; }
 .btn-submit { background: var(--ink); border: none; color: var(--parchment); font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; padding: 16px 44px; border-radius: 50px; cursor: pointer; transition: background 0.15s, transform 0.12s; display: inline-flex; align-items: center; gap: 10px; letter-spacing: 0.02em; box-shadow: 0 6px 32px rgba(28,20,24,0.18); }
 .btn-submit:hover { background: var(--ink-soft); transform: translateY(-1px); }
 .btn-submit:disabled { opacity: 0.7; cursor: default; transform: none; }
@@ -95,11 +94,6 @@ textarea { resize: vertical; min-height: 88px; line-height: 1.6; }
 .reassurance { margin-top: 18px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
 .reassurance span { font-size: 11.5px; color: var(--text-muted); display: flex; align-items: center; gap: 5px; }
 .reassurance svg { width: 12px; height: 12px; color: var(--sage); }
-.fp-preview { background: var(--ink); border-radius: 12px; padding: 20px 24px; margin-bottom: 32px; }
-.fp-title { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 14px; }
-.fp-bars { display: flex; align-items: flex-end; gap: 5px; height: 48px; }
-.fp-bar { flex: 1; border-radius: 3px 3px 0 0; background: var(--rose); opacity: 0.2; min-height: 4px; transition: height 0.4s ease, opacity 0.3s; }
-.fp-bar.lit { opacity: 0.9; }
 .goal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
 .goal-item { display: flex; align-items: flex-start; gap: 10px; background: var(--parchment); border: 1.5px solid var(--border); border-radius: 10px; padding: 13px 14px; cursor: pointer; transition: all 0.15s; user-select: none; }
 .goal-item:hover { border-color: var(--rose-light); background: var(--rose-pale); }
@@ -149,23 +143,23 @@ const ArrowL = () => (
 
 const STEP_LABELS = ["Symptoms", "Severity", "Sleep", "Lifestyle", "Goals", "Your Info"];
 
-const SYMPTOMS: { v: string; l: string; h: number }[] = [
-  { v: "hot_flashes", l: "Hot flashes", h: 72 },
-  { v: "night_sweats", l: "Night sweats", h: 88 },
-  { v: "sleep", l: "Sleep disruption", h: 60 },
-  { v: "weight", l: "Weight gain (belly)", h: 64 },
-  { v: "brain_fog", l: "Brain fog", h: 52 },
-  { v: "mood", l: "Mood swings", h: 56 },
-  { v: "anxiety", l: "Anxiety", h: 48 },
-  { v: "low_mood", l: "Low mood", h: 40 },
-  { v: "joint_pain", l: "Joint / muscle pain", h: 44 },
-  { v: "fatigue", l: "Fatigue / low energy", h: 68 },
-  { v: "libido", l: "Low libido", h: 36 },
-  { v: "vaginal", l: "Vaginal dryness", h: 32 },
-  { v: "skin_hair", l: "Skin / hair changes", h: 28 },
-  { v: "palpitations", l: "Palpitations", h: 44 },
-  { v: "headaches", l: "Headaches", h: 40 },
-  { v: "bladder", l: "Bladder changes", h: 36 },
+const SYMPTOMS: { v: string; l: string; h: number; e: string }[] = [
+  { v: "hot_flashes", l: "Hot flashes", h: 72, e: "🌡️" },
+  { v: "night_sweats", l: "Night sweats", h: 88, e: "💧" },
+  { v: "sleep", l: "Waking at 3am", h: 60, e: "😴" },
+  { v: "weight", l: "Belly weight that won't shift", h: 64, e: "⚖️" },
+  { v: "brain_fog", l: "Brain fog at work", h: 52, e: "🌫️" },
+  { v: "mood", l: "Irritability you can't explain", h: 56, e: "😤" },
+  { v: "anxiety", l: "Anxiety out of nowhere", h: 48, e: "😰" },
+  { v: "low_mood", l: "Low mood for no reason", h: 40, e: "😢" },
+  { v: "joint_pain", l: "Aching joints", h: 44, e: "🦴" },
+  { v: "fatigue", l: "Exhausted by noon", h: 68, e: "⚡" },
+  { v: "libido", l: "Lost interest in intimacy", h: 36, e: "❤️" },
+  { v: "vaginal", l: "Vaginal dryness", h: 32, e: "🌸" },
+  { v: "skin_hair", l: "Skin / hair changes", h: 28, e: "✨" },
+  { v: "palpitations", l: "Palpitations that frighten you", h: 44, e: "💊" },
+  { v: "headaches", l: "Forgetting words mid-sentence", h: 40, e: "🧠" },
+  { v: "bladder", l: "Not feeling like yourself", h: 36, e: "💔" },
 ];
 
 const STAGES = [
@@ -176,14 +170,6 @@ const STAGES = [
   { v: "unsure", l: "Not sure" },
 ];
 
-const SEVERITY_ROWS: { k: keyof NonNullable<IntakeData["severity"]>; l: string }[] = [
-  { k: "hf", l: "Hot flashes / Night sweats" },
-  { k: "sl", l: "Sleep disruption" },
-  { k: "mo", l: "Mood / Anxiety" },
-  { k: "wt", l: "Weight gain / Belly fat" },
-  { k: "fa", l: "Energy / Fatigue" },
-  { k: "bf", l: "Brain fog / Focus" },
-];
 
 const DURATIONS = [
   { v: "lt6mo", l: "Less than 6 months" },
@@ -330,8 +316,8 @@ export default function AssessmentPage() {
     });
   }
 
-  function setSeverity(k: keyof NonNullable<IntakeData["severity"]>, val: number) {
-    setData((d) => ({ ...d, severity: { hf: 0, sl: 0, mo: 0, wt: 0, fa: 0, bf: 0, ...(d.severity ?? {}), [k]: val } }));
+  function setSeverity(k: string, val: number) {
+    setData((d) => ({ ...d, severity: { ...(d.severity ?? {}), [k]: val } }));
   }
 
   function stepPayload(n: number): Partial<IntakeData> {
@@ -414,27 +400,26 @@ export default function AssessmentPage() {
 
       <header className="topbar">
         <div className="logo">
-          Bloomia
-          <span>Personalized Menopause Intelligence</span>
+          <em>B</em>loomia
         </div>
-        <div className="topbar-badge">Free Assessment</div>
+        <div className="topbar-badge">Personalized Protocol</div>
       </header>
 
       <section className="hero">
         <div className="hero-inner">
-          <p className="hero-eyebrow">Your Personalized Menopause Management Protocol</p>
           <h1>
-            Your body has changed.<br />
-            <em>Your plan should too.</em>
+            You&rsquo;re not falling apart.<br />
+            You&rsquo;re just missing<br />
+            <em>your specific plan.</em>
           </h1>
           <p className="hero-desc">
             Answer these questions honestly. The more detail you provide, the more precisely your Protocol will be
             calibrated to your specific symptoms, stage, and lifestyle.
           </p>
           <div className="hero-stats">
-            <div className="hero-stat"><span className="hero-stat-val">8–10</span><span className="hero-stat-label">min to complete</span></div>
+            <div className="hero-stat"><span className="hero-stat-val">5min</span><span className="hero-stat-label">to complete</span></div>
             <div className="hero-stat"><span className="hero-stat-val">20+</span><span className="hero-stat-label">page protocol</span></div>
-            <div className="hero-stat"><span className="hero-stat-val">24h</span><span className="hero-stat-label">delivery</span></div>
+            <div className="hero-stat"><span className="hero-stat-val">5min</span><span className="hero-stat-label">delivery</span></div>
           </div>
         </div>
       </section>
@@ -468,23 +453,6 @@ export default function AssessmentPage() {
                 Protocol is calibrated.
               </p>
 
-              {(data.symptoms?.length ?? 0) > 0 && (
-                <div className="fp-preview">
-                  <p className="fp-title">Your symptom fingerprint is taking shape…</p>
-                  <div className="fp-bars">
-                    {SYMPTOMS.map((s) => {
-                      const lit = litSymptoms.has(s.v);
-                      return (
-                        <div
-                          key={s.v}
-                          className={`fp-bar ${lit ? "lit" : ""}`}
-                          style={{ height: lit ? `${s.h}px` : "4px" }}
-                        />
-                      );
-                    })}
-                  </div>
-                </div>
-              )}
 
               <div className="field">
                 <div className="check-grid">
@@ -540,18 +508,20 @@ export default function AssessmentPage() {
 
               <div className="field" style={{ marginTop: 12 }}>
                 <div className="severity-rows">
-                  {SEVERITY_ROWS.map((row) => {
-                    const current = data.severity?.[row.k] ?? 0;
+                  {(data.symptoms ?? []).map((v) => {
+                    const symptom = SYMPTOMS.find((s) => s.v === v);
+                    if (!symptom) return null;
+                    const current = data.severity?.[v] ?? 0;
                     return (
-                      <div className="severity-row" key={row.k}>
-                        <span className="sev-name">{row.l}</span>
+                      <div className="severity-row" key={v}>
+                        <span className="sev-name">{symptom.l}</span>
                         <div className="sev-dots">
                           {[1, 2, 3].map((val) => (
                             <button
                               type="button"
                               key={val}
                               className={`sev-dot ${current >= val && current > 0 ? `sel-${current}` : ""}`}
-                              onClick={() => setSeverity(row.k, val)}
+                              onClick={() => setSeverity(v, val)}
                             >
                               <span>{val}</span>
                               <span className="dot-label">{val === 1 ? "Mild" : val === 2 ? "Mod" : "Severe"}</span>
@@ -814,8 +784,7 @@ export default function AssessmentPage() {
               <p className="step-eyebrow">Step 6 of 6 · Almost there</p>
               <h2>Where should we <em>send it?</em></h2>
               <p className="step-subtitle">
-                Your Protocol is generated to your name and profile. It will be in your inbox within 24 hours — usually
-                much faster.
+                Your Protocol is generated to your name and profile. It will be in your inbox within minutes.
               </p>
 
               <div className="callout sage">
@@ -857,27 +826,19 @@ export default function AssessmentPage() {
               <div className="field-divider" />
 
               <div className="submit-block">
-                <div className="price-row">
-                  <span className="price-currency">$</span>
-                  <span className="price-amount">27</span>
-                </div>
-                <p className="price-label">One-time · No subscription · Delivered to your inbox</p>
                 <button className="btn-submit" type="button" onClick={handleSubmit} disabled={saving}>
                   <ArrowR />
                   {saving ? "Saving…" : "Generate my Protocol"}
                 </button>
+                <p className="price-label">Delivered to your inbox</p>
                 <div className="reassurance">
-                  <span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
-                    Stripe-secured payment
-                  </span>
                   <span>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
                     Fully private
                   </span>
                   <span>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
-                    24h delivery
+                    5min delivery
                   </span>
                 </div>
               </div>

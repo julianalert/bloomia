@@ -5,14 +5,8 @@ export interface IntakeData {
   stage?: "peri_early" | "peri_late" | "menopause" | "post" | "unsure";
 
   // Step 2 — Severity & health context
-  severity?: {
-    hf: number; // hot flashes 1–3
-    sl: number; // sleep 1–3
-    mo: number; // mood/anxiety 1–3
-    wt: number; // weight 1–3
-    fa: number; // fatigue 1–3
-    bf: number; // brain fog 1–3
-  };
+  // keys match SYMPTOMS[].v from the assessment form
+  severity?: Record<string, number>;
   duration?: "lt6mo" | "6_12" | "1_3yr" | "3plus";
   hrt?: "none" | "prescribed" | "bioidentical" | "considering" | "stopped";
   conditions?: string[];

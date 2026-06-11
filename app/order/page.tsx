@@ -6,8 +6,8 @@ const ORDER_CSS = `
 :root { --ink:#1C1418; --ink-soft:#3A2F36; --parchment:#FAF6F0; --parchment-2:#F2EBE1; --border:#E0D5C8; --rose:#B05A72; --rose-light:#E8A4B5; --rose-pale:#F9EEF2; --sage:#6B9E85; --sage-pale:#EAF3EE; --amber:#C07840; --amber-pale:#FBF0E4; --text-main:#2C2228; --text-body:#4A3E44; --text-muted:#8A7A82; --white:#FFFFFF; }
 body { background: var(--parchment-2); color: var(--text-main); font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.65; min-height: 100vh; }
 .topbar { background: var(--ink); padding: 16px 40px; display: flex; align-items: center; justify-content: space-between; }
-.logo { font-family: 'Playfair Display', serif; font-size: 17px; color: var(--parchment); letter-spacing: 0.03em; }
-.logo span { display: block; font-family: 'Inter', sans-serif; font-size: 10px; color: rgba(255,255,255,0.38); letter-spacing: 0.14em; text-transform: uppercase; margin-top: 1px; font-weight: 400; }
+.logo { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--parchment); letter-spacing: 0.06em; font-weight: 400; line-height: 1; }
+.logo em { font-style: italic; color: var(--rose-light); font-size: 22px; letter-spacing: 0.02em; margin-right: 1px; }
 .topbar-step { display: flex; align-items: center; gap: 8px; font-size: 12px; color: rgba(255,255,255,0.35); letter-spacing: 0.05em; }
 .topbar-step .done { color: var(--sage); font-weight: 600; }
 .topbar-step .sep { opacity: 0.3; }
@@ -177,8 +177,7 @@ export default function OrderPage() {
 
       <header className="topbar">
         <div className="logo">
-          Bloomia
-          <span>Personalized Menopause Intelligence</span>
+          <em>B</em>loomia
         </div>
         <div className="topbar-step">
           <span className="done">✓ Assessment complete</span>
