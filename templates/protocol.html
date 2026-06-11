@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sophie's Personalized Menopause Management Protocol</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink:         #1C1418;
+    --ink-soft:    #3A2F36;
+    --parchment:   #FAF6F0;
+    --parchment-2: #F2EBE1;
+    --border:      #E0D5C8;
+    --border-dark: #C8BCAF;
+    --rose:        #B05A72;
+    --rose-light:  #E8A4B5;
+    --rose-pale:   #F7EBEf;
+    --sage:        #6B9E85;
+    --sage-pale:   #EAF3EE;
+    --amber:       #C07840;
+    --amber-pale:  #FBF0E4;
+    --plum:        #7B4F7E;
+    --plum-pale:   #F0EAF5;
+    --text-main:   #2C2228;
+    --text-body:   #4A3E44;
+    --text-muted:  #8A7A82;
+  }
+
+  @media print {
+    body { background: white; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+  }
+
+  body {
+    background: #E8E0D8;
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .document {
+    max-width: 920px;
+    margin: 40px auto;
+    background: var(--parchment);
+    box-shadow: 0 4px 60px rgba(0,0,0,0.15);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  /* ── Cover ── */
+  .cover {
+    background: var(--ink);
+    color: white;
+    padding: 64px 60px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(176,90,114,0.25) 0%, transparent 70%);
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(107,158,133,0.15) 0%, transparent 70%);
+  }
+  .cover-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 56px;
+    position: relative;
+    z-index: 1;
+  }
+  .doc-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.04em;
+  }
+  .doc-id {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.08em;
+    text-align: right;
+    line-height: 1.8;
+  }
+
+  .cover-body { position: relative; z-index: 1; }
+  .cover-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rose-light);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .cover h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: white;
+    margin-bottom: 8px;
+  }
+  .cover h1 em { font-style: italic; color: var(--rose-light); }
+  .cover-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-style: italic;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 36px;
+  }
+
+  /* ── Symptom Fingerprint (signature element) ── */
+  .fingerprint {
+    display: flex;
+    gap: 6px;
+    align-items: flex-end;
+    margin-bottom: 36px;
+  }
+  .fp-bar-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .fp-bar {
+    width: 32px;
+    border-radius: 3px 3px 0 0;
+    transition: height 0.3s;
+  }
+  .fp-label {
+    font-size: 9px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.08em;
+    text-align: center;
+    white-space: nowrap;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    height: 52px;
+    display: flex;
+    align-items: center;
+  }
+  .fp-title {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 8px;
+  }
+
+  .cover-meta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .cover-meta-item {
+    background: rgba(255,255,255,0.04);
+    padding: 14px 16px;
+    text-align: center;
+  }
+  .cover-meta-item .val {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: white;
+    display: block;
+    font-weight: 400;
+  }
+  .cover-meta-item .key {
+    font-size: 10px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: block;
+    margin-top: 2px;
+  }
+
+  /* ── Inner pages ── */
+  .page { padding: 52px 60px; border-bottom: 1px solid var(--border); }
+  .page:last-child { border-bottom: none; }
+
+  /* ── Section Header ── */
+  .sec-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .sec-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 20px;
+  }
+  .sec-icon.rose { background: var(--rose-pale); }
+  .sec-icon.sage { background: var(--sage-pale); }
+  .sec-icon.amber { background: var(--amber-pale); }
+  .sec-icon.plum { background: var(--plum-pale); }
+  .sec-meta { flex: 1; }
+  .sec-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+  .sec-meta h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--ink);
+  }
+  .sec-meta p {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 4px;
+    line-height: 1.5;
+  }
+
+  /* ── Callout ── */
+  .callout {
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 28px;
+    border-left: 3px solid;
+  }
+  .callout.rose { background: var(--rose-pale); border-color: var(--rose); }
+  .callout.sage { background: var(--sage-pale); border-color: var(--sage); }
+  .callout.amber { background: var(--amber-pale); border-color: var(--amber); }
+  .callout.plum { background: var(--plum-pale); border-color: var(--plum); }
+  .callout-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .callout.rose .callout-label { color: var(--rose); }
+  .callout.sage .callout-label { color: var(--sage); }
+  .callout.amber .callout-label { color: var(--amber); }
+  .callout.plum .callout-label { color: var(--plum); }
+  .callout p { font-size: 13px; color: var(--text-body); line-height: 1.65; }
+  .callout strong { color: var(--text-main); }
+
+  /* ── Body text ── */
+  .body-text {
+    font-size: 14px;
+    color: var(--text-body);
+    line-height: 1.75;
+    margin-bottom: 20px;
+  }
+  .body-text strong { color: var(--text-main); }
+
+  /* ── Protocol Cards ── */
+  .protocol-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+  .protocol-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    background: white;
+    position: relative;
+  }
+  .protocol-card .card-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+  }
+  .protocol-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .protocol-card p {
+    font-size: 12.5px;
+    color: var(--text-body);
+    line-height: 1.6;
+  }
+  .protocol-card .card-tag {
+    display: inline-block;
+    font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 12px;
+  }
+  .tag-rose { background: var(--rose-pale); color: var(--rose); }
+  .tag-sage { background: var(--sage-pale); color: var(--sage); }
+  .tag-amber { background: var(--amber-pale); color: var(--amber); }
+  .tag-plum { background: var(--plum-pale); color: var(--plum); }
+
+  /* ── Timeline / Steps ── */
+  .timeline { margin-bottom: 28px; }
+  .tl-item {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 16px;
+    padding-bottom: 24px;
+    position: relative;
+  }
+  .tl-item:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 13px;
+    top: 28px;
+    bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+  .tl-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: white;
+    flex-shrink: 0;
+  }
+  .tl-dot.rose { background: var(--rose); }
+  .tl-dot.sage { background: var(--sage); }
+  .tl-dot.amber { background: var(--amber); }
+  .tl-content {}
+  .tl-week {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+  .tl-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .tl-desc {
+    font-size: 13px;
+    color: var(--text-body);
+    line-height: 1.65;
+  }
+
+  /* ── Supplement Table ── */
+  .supp-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 28px;
+    font-size: 13px;
+  }
+  .supp-table thead tr {
+    background: var(--ink);
+    color: white;
+  }
+  .supp-table thead th {
+    padding: 11px 16px;
+    text-align: left;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .supp-table tbody tr {
+    border-bottom: 1px solid var(--border);
+  }
+  .supp-table tbody tr:nth-child(even) { background: rgba(250,246,240,0.8); }
+  .supp-table tbody td {
+    padding: 12px 16px;
+    color: var(--text-body);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .supp-table tbody td:first-child {
+    font-weight: 500;
+    color: var(--text-main);
+  }
+  .priority-badge {
+    display: inline-block;
+    font-size: 9px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .p-high { background: var(--rose-pale); color: var(--rose); }
+  .p-mod  { background: var(--amber-pale); color: var(--amber); }
+  .p-low  { background: var(--sage-pale); color: var(--sage); }
+
+  /* ── Daily Rhythm ── */
+  .rhythm-list { margin-bottom: 28px; }
+  .rhythm-item {
+    display: flex;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .rhythm-item:first-child { padding-top: 0; }
+  .rhythm-time {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--rose);
+    width: 68px;
+    flex-shrink: 0;
+    padding-top: 1px;
+    font-weight: 500;
+  }
+  .rhythm-content {}
+  .rhythm-title { font-weight: 600; font-size: 13px; color: var(--text-main); margin-bottom: 2px; }
+  .rhythm-desc { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; }
+
+  /* ── Doctor's Brief ── */
+  .doc-brief {
+    background: var(--ink);
+    color: white;
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 28px;
+  }
+  .doc-brief h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 18px;
+    color: var(--rose-light);
+  }
+  .doc-brief .brief-section {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .doc-brief .brief-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .doc-brief .brief-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 8px;
+  }
+  .doc-brief ul {
+    list-style: none;
+    padding: 0;
+  }
+  .doc-brief ul li {
+    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+    padding: 4px 0;
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .doc-brief ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--rose-light);
+    font-size: 11px;
+  }
+
+  /* ── Nutrient Foods ── */
+  .nutrient-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .nutrient-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    background: white;
+  }
+  .nutrient-card h5 {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 6px;
+    letter-spacing: 0.03em;
+  }
+  .nutrient-card .why {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    line-height: 1.45;
+  }
+  .food-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+  .food-tag {
+    font-size: 10.5px;
+    background: var(--parchment-2);
+    border: 1px solid var(--border);
+    color: var(--text-body);
+    padding: 3px 9px;
+    border-radius: 20px;
+  }
+
+  /* ── Footer ── */
+  .doc-footer {
+    padding: 28px 60px;
+    background: var(--parchment-2);
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .doc-footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+  .doc-footer-disclaimer {
+    font-size: 11px;
+    color: var(--text-muted);
+    max-width: 420px;
+    text-align: right;
+    line-height: 1.5;
+  }
+
+  /* ── Print button ── */
+  .print-bar {
+    max-width: 920px;
+    margin: 0 auto 16px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  .btn-print {
+    background: var(--ink);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── Table of contents ── */
+  .toc {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 0;
+  }
+  .toc-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-body);
+    transition: background 0.15s, border-color 0.15s;
+    cursor: pointer;
+  }
+  .toc-item:hover { background: white; border-color: var(--rose-light); }
+  .toc-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    width: 20px;
+    flex-shrink: 0;
+  }
+  .toc-text { font-size: 13px; font-weight: 500; }
+</style>
+</head>
+<body>
+
+<div class="print-bar no-print">
+  <button class="btn-print" onclick="window.print()">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+    Save as PDF
+  </button>
+</div>
+
+<div class="document">
+
+  <!-- ══ COVER ══ -->
+  <div class="cover">
+    <div class="cover-top">
+      <div class="doc-logo">Bloomia</div>
+      <div class="doc-id">
+        REF: BL-2026-00847<br>
+        ISSUED: 11 JUNE 2026<br>
+        VERSION 1.0
+      </div>
+    </div>
+
+    <div class="cover-body">
+      <p class="cover-label">Personalized Menopause Management Protocol</p>
+      <h1>Your Menopause<br><em>Protocol</em></h1>
+      <p class="cover-name">Prepared for Sophie, 49</p>
+
+      <p class="fp-title">Your Symptom Fingerprint</p>
+      <div class="fingerprint">
+        <div class="fp-bar-wrap">
+          <div class="fp-bar" style="height:72px; background: rgba(176,90,114,0.85);"></div>
+          <div class="fp-label">Hot flashes</div>
+        </div>
+        <div class="fp-bar-wrap">
+          <div class="fp-bar" style="height:88px; background: rgba(176,90,114,0.95);"></div>
+          <div class="fp-label">Night sweats</div>
+        </div>
+        <div class="fp-bar-wrap">
+          <div class="fp-bar" style="height:80px; background: rgba(176,90,114,0.9);"></div>
+          <div class="fp-label">Sleep</div>
+        </div>
+        <div class="fp-bar-wrap">
+          <div class="fp-bar" style="height:64px; background: rgba(192,120,64,0.8);"></div>
+          <div class="fp-label">Weight</div>
+        </div>
+        <div class="fp-bar-wrap">
+          <div class="fp-bar" style="height:56px; background: rgba(107,158,133,0.75);"></div>
+          <div class="fp-label">Anxiety</div>
+        </div>
+        <div class="fp-bar-wrap">
+          <div class="fp-bar" style="height:48px; background: rgba(107,158,133,0.65);"></div>
+          <div class="fp-label">Brain fog</div>
+        </div>
+        <div class="fp-bar-wrap">
+          <div class="fp-bar" style="height:36px; background: rgba(123,79,126,0.6);"></div>
+          <div class="fp-label">Libido</div>
+        </div>
+        <div class="fp-bar-wrap">
+          <div class="fp-bar" style="height:28px; background: rgba(123,79,126,0.5);"></div>
+          <div class="fp-label">Joint pain</div>
+        </div>
+      </div>
+
+      <div class="cover-meta">
+        <div class="cover-meta-item"><span class="val">Late Peri</span><span class="key">Stage</span></div>
+        <div class="cover-meta-item"><span class="val">2 yr</span><span class="key">Duration</span></div>
+        <div class="cover-meta-item"><span class="val">4</span><span class="key">Focus areas</span></div>
+        <div class="cover-meta-item"><span class="val">6 wk</span><span class="key">Protocol span</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PAGE 1: WHAT'S HAPPENING ══ -->
+  <div class="page">
+    <div class="sec-header">
+      <div class="sec-icon rose">🧬</div>
+      <div class="sec-meta">
+        <p class="sec-eyebrow">Understanding your body</p>
+        <h2>What's Happening Right Now</h2>
+        <p>Your symptoms decoded — and why they're showing up together</p>
+      </div>
+    </div>
+
+    <div class="callout rose">
+      <p class="callout-label">Your situation at a glance</p>
+      <p>Based on your intake, Sophie, you are in <strong>late perimenopause</strong> — the 1–3 year window before your final period, typically the most symptomatic phase. Your symptom cluster (night sweats, disrupted sleep, weight gain, and anxiety) is a <strong>classic cortisol-estrogen cascade</strong>: declining estrogen destabilises cortisol regulation, which then disrupts sleep, elevates stress, increases fat storage, and amplifies heat responses. These symptoms reinforce each other. The good news: this cascade is interruptible.</p>
+    </div>
+
+    <p class="body-text">You are not imagining it. The fact that you experience most symptoms at their worst between 2am and 4am is a hormonal pattern, not a sleep disorder. Progesterone — which acts as your natural sedative — drops first in perimenopause, well before estrogen follows. This is why you fall asleep fine but wake and can't return to sleep.</p>
+
+    <p class="body-text">The belly weight you mentioned is specifically <strong>visceral adipose tissue</strong> — fat stored around your organs as a direct response to elevated cortisol and reduced estrogen's protective effect. Standard calorie restriction makes this worse. Your protocol addresses this specifically.</p>
+
+    <div class="protocol-grid">
+      <div class="protocol-card">
+        <p class="card-number">MECHANISM 01</p>
+        <h4>The Cortisol–Estrogen Loop</h4>
+        <p>As estrogen falls, your brain's thermostat (the hypothalamus) becomes hypersensitive. Even small fluctuations trigger hot flashes and activate your stress response.</p>
+        <span class="card-tag tag-rose">Primary driver</span>
+      </div>
+      <div class="protocol-card">
+        <p class="card-number">MECHANISM 02</p>
+        <h4>Progesterone Depletion</h4>
+        <p>Progesterone binds to GABA receptors in your brain — the calming, sleep-inducing receptors. Its decline explains your anxiety and broken sleep simultaneously.</p>
+        <span class="card-tag tag-plum">Sleep + anxiety</span>
+      </div>
+      <div class="protocol-card">
+        <p class="card-number">MECHANISM 03</p>
+        <h4>Insulin Resistance Shift</h4>
+        <p>Estrogen helps regulate insulin sensitivity. Its decline means your cells respond differently to carbohydrates, contributing to energy crashes and abdominal fat storage.</p>
+        <span class="card-tag tag-amber">Weight related</span>
+      </div>
+      <div class="protocol-card">
+        <p class="card-number">MECHANISM 04</p>
+        <h4>Serotonin Fluctuation</h4>
+        <p>Estrogen supports serotonin production and receptor sensitivity. Lower estrogen means mood instability is physiological, not psychological — and highly addressable with the right inputs.</p>
+        <span class="card-tag tag-sage">Mood + fog</span>
+      </div>
+    </div>
+
+    <!-- Table of Contents -->
+    <div class="sec-header" style="margin-top: 36px;">
+      <div class="sec-meta">
+        <p class="sec-eyebrow">What's inside your protocol</p>
+        <h2>Your 6-Week Roadmap</h2>
+      </div>
+    </div>
+    <div class="toc">
+      <div class="toc-item"><span class="toc-num">01</span><span class="toc-text">Nutrition Protocol</span></div>
+      <div class="toc-item"><span class="toc-num">02</span><span class="toc-text">Sleep Rescue Plan</span></div>
+      <div class="toc-item"><span class="toc-num">03</span><span class="toc-text">Movement Strategy</span></div>
+      <div class="toc-item"><span class="toc-num">04</span><span class="toc-text">Supplement Stack</span></div>
+      <div class="toc-item"><span class="toc-num">05</span><span class="toc-text">Daily Symptom Rhythm</span></div>
+      <div class="toc-item"><span class="toc-num">06</span><span class="toc-text">Your Doctor's Brief</span></div>
+    </div>
+  </div>
+
+  <!-- ══ PAGE 2: NUTRITION ══ -->
+  <div class="page">
+    <div class="sec-header">
+      <div class="sec-icon amber">🥗</div>
+      <div class="sec-meta">
+        <p class="sec-eyebrow">Protocol 01 · Nutrition</p>
+        <h2>Eating for Your Hormones</h2>
+        <p>Not a diet. A hormonal support framework calibrated for late perimenopause.</p>
+      </div>
+    </div>
+
+    <div class="callout amber">
+      <p class="callout-label">Your Nutrition Profile</p>
+      <p>You eat a Mediterranean-style diet and rate your diet quality at 3/5. Your main challenge is sugar cravings (especially late afternoon) and belly fat you can't shift. This protocol is built around your existing eating style — not a replacement of it.</p>
+    </div>
+
+    <p class="body-text">The most impactful change for your symptom profile is <strong>protein distribution</strong>. Most women in perimenopause eat most of their protein at dinner. Research now shows that spreading 25–30g of protein across each meal dramatically improves muscle preservation, reduces cortisol spikes, stabilises blood sugar, and directly reduces hot flash frequency within 4–6 weeks.</p>
+
+    <div class="nutrient-grid">
+      <div class="nutrient-card">
+        <h5>Phytoestrogens</h5>
+        <p class="why">Weakly mimic estrogen — can reduce hot flash frequency by 20–40%</p>
+        <div class="food-tags">
+          <span class="food-tag">Edamame</span>
+          <span class="food-tag">Tofu</span>
+          <span class="food-tag">Flaxseeds</span>
+          <span class="food-tag">Tempeh</span>
+          <span class="food-tag">Lentils</span>
+        </div>
+      </div>
+      <div class="nutrient-card">
+        <h5>Tryptophan sources</h5>
+        <p class="why">Precursor to serotonin and melatonin — supports mood and sleep quality</p>
+        <div class="food-tags">
+          <span class="food-tag">Turkey</span>
+          <span class="food-tag">Eggs</span>
+          <span class="food-tag">Pumpkin seeds</span>
+          <span class="food-tag">Greek yogurt</span>
+          <span class="food-tag">Oats</span>
+        </div>
+      </div>
+      <div class="nutrient-card">
+        <h5>Magnesium-rich foods</h5>
+        <p class="why">Calms the nervous system, supports deep sleep, reduces muscle tension</p>
+        <div class="food-tags">
+          <span class="food-tag">Dark chocolate</span>
+          <span class="food-tag">Almonds</span>
+          <span class="food-tag">Spinach</span>
+          <span class="food-tag">Avocado</span>
+          <span class="food-tag">Black beans</span>
+        </div>
+      </div>
+      <div class="nutrient-card">
+        <h5>Anti-inflammatory fats</h5>
+        <p class="why">Omega-3s reduce joint inflammation and support brain clarity</p>
+        <div class="food-tags">
+          <span class="food-tag">Sardines</span>
+          <span class="food-tag">Salmon</span>
+          <span class="food-tag">Walnuts</span>
+          <span class="food-tag">Chia seeds</span>
+          <span class="food-tag">Olive oil</span>
+        </div>
+      </div>
+      <div class="nutrient-card">
+        <h5>Calcium + Vitamin D</h5>
+        <p class="why">Critical for bone density protection as estrogen drops (starts in perimenopause)</p>
+        <div class="food-tags">
+          <span class="food-tag">Sardines w/ bones</span>
+          <span class="food-tag">Kefir</span>
+          <span class="food-tag">Bok choy</span>
+          <span class="food-tag">Fortified oat milk</span>
+        </div>
+      </div>
+      <div class="nutrient-card">
+        <h5>Fermented foods</h5>
+        <p class="why">Gut health directly influences estrogen metabolism and mood regulation</p>
+        <div class="food-tags">
+          <span class="food-tag">Kimchi</span>
+          <span class="food-tag">Live yogurt</span>
+          <span class="food-tag">Kefir</span>
+          <span class="food-tag">Sauerkraut</span>
+          <span class="food-tag">Miso</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout sage">
+      <p class="callout-label">The one swap that matters most for you</p>
+      <p>Replace your afternoon snack (currently likely something sweet) with <strong>20g protein + healthy fat</strong> — e.g. Greek yogurt with walnuts, or 2 boiled eggs with avocado. This single change directly addresses your 4pm cortisol spike and reduces both evening cravings and nighttime hot flashes. Most women notice a difference within 10–14 days.</p>
+    </div>
+
+    <p class="body-text"><strong>Foods to reduce (not eliminate):</strong> Alcohol is the single most common hot flash trigger — even one glass of wine raises core body temperature for 3–4 hours. Spicy foods, caffeine after 1pm, and refined sugar all activate the same hypothalamic sensitivity. Reducing these by 50% is more sustainable and nearly as effective as elimination.</p>
+  </div>
+
+  <!-- ══ PAGE 3: SLEEP ══ -->
+  <div class="page">
+    <div class="sec-header">
+      <div class="sec-icon plum">🌙</div>
+      <div class="sec-meta">
+        <p class="sec-eyebrow">Protocol 02 · Sleep</p>
+        <h2>Sleep Rescue Protocol</h2>
+        <p>Built for the specific pattern of hormonal sleep disruption — not generic sleep hygiene</p>
+      </div>
+    </div>
+
+    <div class="callout plum">
+      <p class="callout-label">Your sleep pattern</p>
+      <p>You fall asleep without issue but wake 2–3 times between 2am and 5am, primarily due to night sweats. You're averaging 5–6 hours of broken sleep. This is <strong>progesterone-driven fragmentation</strong> — different from the delayed-onset insomnia that comes later in menopause. The approach is correspondingly different.</p>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot rose">1</div>
+        <div class="tl-content">
+          <p class="tl-week">Weeks 1–2 · Environment</p>
+          <p class="tl-title">Cool your sleep architecture</p>
+          <p class="tl-desc">Drop bedroom temperature to 16–18°C (61–65°F) — this is the single most evidence-backed intervention for night sweats. Use moisture-wicking bedding (bamboo or merino wool, not cotton). Keep a small fan on your side of the bed. Wear breathable sleepwear. The goal is reducing skin temperature by 1–2°C before hot flash onset, which prevents the full thermogenic cascade.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot sage">2</div>
+        <div class="tl-content">
+          <p class="tl-week">Weeks 1–3 · Evening Routine</p>
+          <p class="tl-title">The 90-minute wind-down protocol</p>
+          <p class="tl-desc">Begin 90 minutes before bed: dim all overhead lights (use warm lamps instead), stop screens or use orange-tinted glasses, take a warm (not hot) shower at the 60-minute mark — the post-shower cooling effect signals deep sleep. At 30 minutes: 10 minutes of slow, extended-exhale breathing (4 counts in, 6 counts out). This activates the parasympathetic nervous system and lowers cortisol.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot amber">3</div>
+        <div class="tl-content">
+          <p class="tl-week">Weeks 2–4 · Waking Protocol</p>
+          <p class="tl-title">When you wake at 2–3am</p>
+          <p class="tl-desc">Do not check your phone. Do not try to force sleep. Instead: slow cold cloth on your wrists and back of neck (2 minutes), then "cognitive shuffling" — imagine a random word and visualize unrelated objects starting with each letter, without a narrative. This intentionally disrupts ruminative thinking, which is what keeps you awake after the sweat subsides. Most women return to sleep within 15–20 minutes using this.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot rose">4</div>
+        <div class="tl-content">
+          <p class="tl-week">Weeks 3–6 · Consolidation</p>
+          <p class="tl-title">Anchor your circadian rhythm</p>
+          <p class="tl-desc">Wake at the same time every morning — even weekends — within a 30-minute window. Get natural light in your eyes within 30 minutes of waking (outdoors or near a window). This is not about discipline; it's the most powerful regulator of your sleep-wake hormones. Combined with the evening protocol, most women report meaningfully improved sleep by week 4.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PAGE 4: MOVEMENT ══ -->
+  <div class="page">
+    <div class="sec-header">
+      <div class="sec-icon sage">🏃‍♀️</div>
+      <div class="sec-meta">
+        <p class="sec-eyebrow">Protocol 03 · Movement</p>
+        <h2>Movement Strategy</h2>
+        <p>What to do, how often, and why the standard advice works against you right now</p>
+      </div>
+    </div>
+
+    <div class="callout sage">
+      <p class="callout-label">Why your usual approach may not be working</p>
+      <p>If you've been doing more cardio to lose weight and it's not working, this is expected. <strong>High-intensity steady-state cardio elevates cortisol</strong> — which, in perimenopause, directly increases visceral fat storage and worsens hot flashes. Your protocol shifts the balance toward resistance training (primary) and moderate-intensity cardio (secondary).</p>
+    </div>
+
+    <div class="protocol-grid">
+      <div class="protocol-card">
+        <p class="card-number">PRIORITY 01</p>
+        <h4>Resistance Training × 3/week</h4>
+        <p>The single most powerful intervention for menopause body composition, bone density, insulin sensitivity, and energy. You don't need a gym — bodyweight, resistance bands, or dumbbells are sufficient. Focus on compound movements: squats, hip hinges, push-ups, rows.</p>
+        <span class="card-tag tag-sage">30–45 min sessions</span>
+      </div>
+      <div class="protocol-card">
+        <p class="card-number">PRIORITY 02</p>
+        <h4>Zone 2 Walking × 4–5/week</h4>
+        <p>Low-intensity walking (where you can hold a conversation) for 30–40 minutes. This specifically reduces cortisol, improves insulin sensitivity, and burns fat — without triggering the stress response that makes symptoms worse. Morning walks in natural light are doubly beneficial.</p>
+        <span class="card-tag tag-sage">Morning preferred</span>
+      </div>
+      <div class="protocol-card">
+        <p class="card-number">PRIORITY 03</p>
+        <h4>Yoga or Pilates × 1–2/week</h4>
+        <p>Not for flexibility alone — yoga's extended exhale breathing actively lowers cortisol. Yin yoga and restorative yoga specifically support the nervous system and are highly effective for anxiety, sleep prep, and hot flash reduction.</p>
+        <span class="card-tag tag-plum">Evening works well</span>
+      </div>
+      <div class="protocol-card">
+        <p class="card-number">LIMIT THIS</p>
+        <h4>HIIT / Intense cardio</h4>
+        <p>If you currently do bootcamps, spinning, or high-intensity classes 4+ times a week, reduce to 1× maximum for the first 6 weeks. The cortisol load counteracts most of the benefit for women at your stage. You can reintroduce more strategically from week 7.</p>
+        <span class="card-tag tag-amber">Reduce temporarily</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PAGE 5: SUPPLEMENTS ══ -->
+  <div class="page">
+    <div class="sec-header">
+      <div class="sec-icon rose">💊</div>
+      <div class="sec-meta">
+        <p class="sec-eyebrow">Protocol 04 · Supplements</p>
+        <h2>Your Supplement Stack</h2>
+        <p>Evidence-based, ordered by priority for your specific symptom profile</p>
+      </div>
+    </div>
+
+    <div class="callout rose">
+      <p class="callout-label">Important note</p>
+      <p>These are non-hormonal supplements with strong research backing for the symptoms you reported. They are not a substitute for medical care. Always consult your doctor before starting, especially given your list. Your Doctor's Brief (page 6) includes specific questions to ask about all of these.</p>
+    </div>
+
+    <table class="supp-table">
+      <thead>
+        <tr>
+          <th>Supplement</th>
+          <th>Dose</th>
+          <th>Primary benefit</th>
+          <th>Timing</th>
+          <th>Priority</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Magnesium Glycinate</td>
+          <td>300–400mg</td>
+          <td>Sleep depth, anxiety, muscle tension, hot flash reduction</td>
+          <td>1–2h before bed</td>
+          <td><span class="priority-badge p-high">High</span></td>
+        </tr>
+        <tr>
+          <td>Vitamin D3 + K2</td>
+          <td>2,000–4,000 IU D3 + 100mcg K2</td>
+          <td>Bone density, mood, immune function, sleep regulation</td>
+          <td>With breakfast (fat)</td>
+          <td><span class="priority-badge p-high">High</span></td>
+        </tr>
+        <tr>
+          <td>Omega-3 (EPA/DHA)</td>
+          <td>1,000–2,000mg EPA+DHA</td>
+          <td>Inflammation, brain fog, joint pain, mood stabilisation</td>
+          <td>With main meal</td>
+          <td><span class="priority-badge p-high">High</span></td>
+        </tr>
+        <tr>
+          <td>Ashwagandha (KSM-66)</td>
+          <td>600mg</td>
+          <td>Cortisol reduction, anxiety, energy, sleep onset</td>
+          <td>Morning or evening</td>
+          <td><span class="priority-badge p-mod">Medium</span></td>
+        </tr>
+        <tr>
+          <td>Black Cohosh</td>
+          <td>20–40mg</td>
+          <td>Hot flash frequency and intensity reduction</td>
+          <td>With food, consistently</td>
+          <td><span class="priority-badge p-mod">Medium</span></td>
+        </tr>
+        <tr>
+          <td>L-Theanine</td>
+          <td>200mg</td>
+          <td>Calm alertness during day; sleep quality at night</td>
+          <td>Morning or bedtime</td>
+          <td><span class="priority-badge p-low">Supportive</span></td>
+        </tr>
+        <tr>
+          <td>Probiotics (multi-strain)</td>
+          <td>10–50 billion CFU</td>
+          <td>Gut-hormone axis, estrogen metabolism, mood</td>
+          <td>Morning, before food</td>
+          <td><span class="priority-badge p-low">Supportive</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="body-text" style="font-size:12px; color: var(--text-muted);">Start with the High priority items only for the first 3–4 weeks. Add Medium priority at week 4. Supportive items at week 6+. This allows you to identify what's working and avoids supplement fatigue.</p>
+  </div>
+
+  <!-- ══ PAGE 6: DAILY RHYTHM ══ -->
+  <div class="page">
+    <div class="sec-header">
+      <div class="sec-icon amber">🕐</div>
+      <div class="sec-meta">
+        <p class="sec-eyebrow">Protocol 05 · Daily Structure</p>
+        <h2>Your Symptom-Optimised Day</h2>
+        <p>Specific timing recommendations based on your cortisol and hormonal rhythm</p>
+      </div>
+    </div>
+
+    <div class="rhythm-list">
+      <div class="rhythm-item">
+        <span class="rhythm-time">06:30</span>
+        <div class="rhythm-content">
+          <p class="rhythm-title">Wake + Light exposure</p>
+          <p class="rhythm-desc">Same time daily. Natural light within 30 minutes — even cloudy outdoor light is 10× stronger than indoor lighting for circadian signalling. Take your Vitamin D3 at breakfast.</p>
+        </div>
+      </div>
+      <div class="rhythm-item">
+        <span class="rhythm-time">07:00</span>
+        <div class="rhythm-content">
+          <p class="rhythm-title">Protein-first breakfast</p>
+          <p class="rhythm-desc">Minimum 25g protein before coffee. This flattens your morning cortisol spike and sets blood sugar for the day. E.g. 3 eggs + Greek yogurt, or smoked salmon + cottage cheese on sourdough.</p>
+        </div>
+      </div>
+      <div class="rhythm-item">
+        <span class="rhythm-time">07:30</span>
+        <div class="rhythm-content">
+          <p class="rhythm-title">30-min Zone 2 walk (3–4×/week)</p>
+          <p class="rhythm-desc">Morning walks in light maximise circadian benefits. Keep pace conversational. This is your primary cortisol regulator for the day.</p>
+        </div>
+      </div>
+      <div class="rhythm-item">
+        <span class="rhythm-time">12:30</span>
+        <div class="rhythm-content">
+          <p class="rhythm-title">Lunch — include phytoestrogens</p>
+          <p class="rhythm-desc">3–4 portions of phytoestrogen foods across the day. Lunch is ideal: lentil soup, tofu stir-fry, edamame salad. Eat your Omega-3 supplement with this meal.</p>
+        </div>
+      </div>
+      <div class="rhythm-item">
+        <span class="rhythm-time">16:00</span>
+        <div class="rhythm-content">
+          <p class="rhythm-title">Protein + fat snack (critical window)</p>
+          <p class="rhythm-desc">This is your cortisol peak window — the most common time for cravings and emotional eating. Greek yogurt + walnuts, or 2 boiled eggs + avocado. Prevents the blood sugar crash that worsens evening symptoms.</p>
+        </div>
+      </div>
+      <div class="rhythm-item">
+        <span class="rhythm-time">17:30</span>
+        <div class="rhythm-content">
+          <p class="rhythm-title">Resistance training (3×/week)</p>
+          <p class="rhythm-desc">Late afternoon is optimal for strength training — core temperature is naturally higher, coordination is at its peak, and it doesn't disrupt sleep the way morning strength training can for some women.</p>
+        </div>
+      </div>
+      <div class="rhythm-item">
+        <span class="rhythm-time">20:00</span>
+        <div class="rhythm-content">
+          <p class="rhythm-title">Magnesium glycinate + L-Theanine</p>
+          <p class="rhythm-desc">Take 1–2 hours before sleep. If you choose to drink alcohol, limit to 1 glass maximum — and expect worse sleep that night.</p>
+        </div>
+      </div>
+      <div class="rhythm-item">
+        <span class="rhythm-time">21:00</span>
+        <div class="rhythm-content">
+          <p class="rhythm-title">Wind-down protocol begins</p>
+          <p class="rhythm-desc">Dim lights. No overhead lighting. End screens or switch to orange glasses. Begin your 90-minute descent toward sleep. Warm shower at 21:30. Slow breathing at 22:00.</p>
+        </div>
+      </div>
+      <div class="rhythm-item">
+        <span class="rhythm-time">22:30</span>
+        <div class="rhythm-content">
+          <p class="rhythm-title">Bedtime — bedroom at 16–18°C</p>
+          <p class="rhythm-desc">Fan on. Moisture-wicking bedding. Cold cloth on your nightstand for 2–3am. Cold water within reach. Phone face down and out of reach.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PAGE 7: DOCTOR'S BRIEF ══ -->
+  <div class="page">
+    <div class="sec-header">
+      <div class="sec-icon plum">🩺</div>
+      <div class="sec-meta">
+        <p class="sec-eyebrow">Protocol 06 · Advocacy</p>
+        <h2>Your Doctor's Brief</h2>
+        <p>Take this to your next appointment — your symptoms summarised, your options laid out, your questions ready</p>
+      </div>
+    </div>
+
+    <div class="doc-brief">
+      <h3>Patient Summary: Sophie, 49 — Late Perimenopause</h3>
+
+      <div class="brief-section">
+        <p class="brief-label">Primary symptoms to discuss</p>
+        <ul>
+          <li>Night sweats: severe, waking 2–3× nightly, primary sleep disruptor</li>
+          <li>Sleep fragmentation (5–6 hours average, broken) — 2 years duration</li>
+          <li>Unresponsive weight gain, particularly abdominal — diet and exercise not working</li>
+          <li>Anxiety, increased since symptoms began — new, not pre-existing</li>
+          <li>Brain fog affecting work performance</li>
+        </ul>
+      </div>
+
+      <div class="brief-section">
+        <p class="brief-label">Questions to ask about HRT</p>
+        <ul>
+          <li>Am I a candidate for body-identical / transdermal HRT given my symptom profile?</li>
+          <li>What is my individual cardiovascular and breast cancer risk profile?</li>
+          <li>Can I try low-dose progesterone specifically for sleep, even before full HRT?</li>
+          <li>What monitoring would be involved if I start?</li>
+        </ul>
+      </div>
+
+      <div class="brief-section">
+        <p class="brief-label">Non-hormonal prescription options to ask about</p>
+        <ul>
+          <li>Fezolinetant (Veozah) — FDA-approved 2023 for vasomotor symptoms, non-hormonal</li>
+          <li>Low-dose SSRIs (e.g. escitalopram) if anxiety continues to escalate</li>
+          <li>Clonidine — non-hormonal option for hot flashes if HRT not suitable</li>
+        </ul>
+      </div>
+
+      <div class="brief-section">
+        <p class="brief-label">Tests worth requesting</p>
+        <ul>
+          <li>FSH + LH levels (to confirm perimenopause stage)</li>
+          <li>Full thyroid panel (TSH, T3, T4) — thyroid dysfunction mimics menopause</li>
+          <li>Fasting insulin + HbA1c — to assess insulin resistance contributing to weight</li>
+          <li>DEXA scan if not done in last 2 years (bone density baseline)</li>
+          <li>Vitamin D level</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout sage">
+      <p class="callout-label">Remember</p>
+      <p>You are allowed to ask for a referral to a <strong>menopause specialist</strong> (not just your GP). In many countries, dedicated menopause clinics exist — a specialist visit is often the fastest path to the right treatment. You don't have to accept "this is just menopause" as the end of the conversation.</p>
+    </div>
+  </div>
+
+  <!-- ══ FOOTER ══ -->
+  <div class="doc-footer">
+    <div class="doc-footer-logo">Bloomia</div>
+    <div class="doc-footer-disclaimer">This protocol provides evidence-informed lifestyle and wellness guidance. It does not constitute medical advice and is not a substitute for consultation with a qualified healthcare provider. Always discuss supplement and treatment decisions with your doctor.</div>
+  </div>
+
+</div>
+
+</body>
+</html>
