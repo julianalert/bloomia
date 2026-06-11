@@ -50,8 +50,42 @@ create index orders_created_at_idx on orders(created_at desc);
 -- access_token already has a unique index from the column constraint above.
 
 -- ───────────────────────────────────────────────────────────────
+-- Row Level Security
+-- All app access is server-side via the SERVICE ROLE key, which
+-- BYPASSES RLS. Enabling RLS with no permissive policies therefore
+-- locks out the public `anon` (and `authenticated`) roles completely
+-- — they cannot select, insert, update, or delete — while the app
+-- continues to work. This closes the hole where anyone holding the
+-- public anon key could read/write/delete orders via the REST API.
+-- ───────────────────────────────────────────────────────────────
+alter table orders enable row level security;
+
+-- Explicit (documentation) policy: only the service role may touch the
+-- table. service_role already bypasses RLS, so this grants nothing new —
+-- anon/authenticated remain fully denied because no policy targets them.
+create policy "service role full access"
+  on orders for all
+  to service_role
+  using (true)
+  with check (true);
+
+-- Defense-in-depth: drop the broad table/function grants Supabase hands
+-- to anon & authenticated on public objects.
+revoke all on table orders from anon, authenticated;
+revoke all on function merge_intake_data(uuid, jsonb, integer) from anon, authenticated, public;
+
+-- ───────────────────────────────────────────────────────────────
 -- Migration for an EXISTING orders table (run only if the table was
 -- created before access_token existed):
 --
 --   alter table orders add column access_token text unique;
+--
+-- And to enforce RLS on an already-live table, run the RLS block above:
+--
+--   alter table orders enable row level security;
+--   create policy "service role full access" on orders for all
+--     to service_role using (true) with check (true);
+--   revoke all on table orders from anon, authenticated;
+--   revoke all on function merge_intake_data(uuid, jsonb, integer)
+--     from anon, authenticated, public;
 -- ───────────────────────────────────────────────────────────────
