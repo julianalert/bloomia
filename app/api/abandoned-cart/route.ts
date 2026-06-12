@@ -5,7 +5,7 @@ import { supabase } from "@/lib/supabase";
 export const runtime = "nodejs";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-const FROM = "Bloomia <hello@bloomia.com>";
+const FROM = "Bloomia <hello@getbloomia.com>";
 
 // ─── Symptom labels (mirrors SYMPTOMS array in assessment page) ───────────────
 const SYMPTOM_LABELS: Record<string, string> = {

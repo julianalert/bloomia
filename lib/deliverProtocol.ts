@@ -2,8 +2,7 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// Update this to a domain you have verified in Resend.
-const FROM_ADDRESS = "Bloomia <hello@bloomia.com>";
+const FROM_ADDRESS = "Bloomia <hello@getbloomia.com>";
 
 function emailHtml(name: string, protocolUrl: string): string {
   const greeting = name ? `Hi ${name},` : "Hi there,";
