@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
               description:
                 "Your 20+ page personalized protocol — delivered to your inbox within 24 hours.",
             },
-            unit_amount: 2700, // $27.00
+            unit_amount: 100, // $1.00 — test only, revert to 2700 before launch
           },
           quantity: 1,
         },
