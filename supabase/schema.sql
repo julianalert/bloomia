@@ -89,3 +89,18 @@ revoke all on function merge_intake_data(uuid, jsonb, integer) from anon, authen
 --   revoke all on function merge_intake_data(uuid, jsonb, integer)
 --     from anon, authenticated, public;
 -- ───────────────────────────────────────────────────────────────
+
+-- ───────────────────────────────────────────────────────────────
+-- Abandoned-cart email tracking
+-- Tracks which recovery emails (1, 2, 3) have been sent for each order.
+-- Migration for existing tables:
+--
+--   alter table orders
+--     add column abandoned_email_sent integer[] default '{}';
+--
+-- ───────────────────────────────────────────────────────────────
+alter table orders
+  add column if not exists abandoned_email_sent integer[] default '{}';
+
+-- The cron trigger is handled by Vercel Cron Jobs (vercel.json).
+-- No Supabase pg_cron setup needed.
