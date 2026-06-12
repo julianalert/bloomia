@@ -11,6 +11,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
+      <head>
+        <script async src="https://scripts.simpleanalyticscdn.com/latest.js" />
+      </head>
       <body>{children}</body>
     </html>
   );
